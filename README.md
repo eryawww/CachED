@@ -10,13 +10,13 @@ The project is organized into the following key files:
 
 * `src/custom_bart.py`: Contains the modified BART (Bidirectional Encoder Representations from Transformers) model architecture.
 * `src/utils.py`: A collection of utility functions essential for the training and evaluation pipeline. This includes checkpoint loading/saving, logging setup (with Weights & Biases integration), argument parsing, seed setting for reproducibility, and text post-processing for metric computation.
-* `summarization_datasets.py`: Defines the PyTorch `Dataset` classes for various long document summarization benchmarks. Each class handles data loading and preprocessing specific to its dataset.
+* `src/summarization_datasets.py`: Defines the PyTorch `Dataset` classes for various long document summarization benchmarks. Each class handles data loading and preprocessing specific to its dataset.
     * `MensaDataset` (for `rohitsaxena/MENSA` Hugging Face dataset).
     * `QMDataset` (for QMSum).
     * `SummScreenDataset`.
     * `GovReportDataset`.
     * `BookSumDataset`.
-* `train.py`: The main script for training and evaluation process. 
+* `src/train.py`: The main script for training and evaluation process. 
 
 ## Setup
 
