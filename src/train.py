@@ -3,6 +3,8 @@ import argparse
 import torch
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+import numpy as np
+import pickle
 from torch.cuda.amp import GradScaler
 import evaluate
 import wandb 
@@ -27,7 +29,8 @@ from summarization_datasets import (
     SummScreenDataset,
     GovReportDataset,
     BookSumDataset,
-    MensaDataset
+    MensaDataset,
+    UbadaaSumDataset
 )
 
 def load_model_and_tokenizer(args):
@@ -40,9 +43,9 @@ def load_model_and_tokenizer(args):
     Returns:
         tuple: (tokenizer, model, config)
     """
-    config = AutoConfig.from_pretrained(args.model_name, cache_dir="/data/huggingface_cache/")
-    tokenizer = BartTokenizer.from_pretrained(args.model_name, cache_dir="/data/huggingface_cache/")
-    model = BartForConditionalGeneration.from_pretrained(args.model_name, cache_dir="/data/huggingface_cache/")
+    config = AutoConfig.from_pretrained(args.model_name)
+    tokenizer = BartTokenizer.from_pretrained(args.model_name)
+    model = BartForConditionalGeneration.from_pretrained(args.model_name)
 
     # If gradient checkpointing is enabled
     if args.grad_ckpt:
@@ -445,7 +448,8 @@ if __name__ == '__main__':
         "summscreen": SummScreenDataset,
         "govreport": GovReportDataset,
         "booksum": BookSumDataset,
-        "mensa": MensaDataset
+        "mensa": MensaDataset,
+        "summarization_custom": UbadaaSumDataset
     }
 
     if args.dataset_name not in dataset_class_map:

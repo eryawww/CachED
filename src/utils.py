@@ -181,7 +181,7 @@ def add_model_specific_args(parser):
     parser.add_argument("--seed", type=int, default=1234, help="Seed for reproducibility")
     parser.add_argument("--lr", type=float, default=1e-4, help="Maximum learning rate")
     parser.add_argument("--warmup", type=int, default=512, help="Number of warmup steps")
-    parser.add_argument("--epochs", type=int, default=200, help="Number of epochs")
+    parser.add_argument("--epochs", type=int, default=20, help="Number of epochs")
     parser.add_argument("--num_workers", type=int, default=4, help="Number of data loader workers")
     parser.add_argument("--limit_val_batches", default=-1, type=int, help='Amount of validation data used')
     parser.add_argument("--limit_test_batches", default=0.08, type=float, help='Percent of test data used')

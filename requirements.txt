@@ -1,5 +1,5 @@
-torch==2.2.0a0+81ea7a4
-torchvision==0.17.0a0
+torch==2.2.0
+torchvision==0.17.0
 transformers==4.41.2
 evaluate==0.4.4
 datasets==2.20.0

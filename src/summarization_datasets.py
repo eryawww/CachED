@@ -176,6 +176,39 @@ class BookSumDataset(Dataset):
 
         return tokenized_input.squeeze(0), output_ids
 
+class UbadaaSumDataset(Dataset):
+    """
+    Dataset class for BookSum summarization dataset.
+    """
+    def __init__(self, tokenizer, split_name, args=None):
+        booksum = load_dataset("ubaada/booksum-complete-cleaned", name="books")
+
+        if split_name == "train":
+            self.data = booksum["train"]
+        elif split_name == "val":
+            self.data = booksum["validation"]
+        elif split_name == "test":
+            self.data = booksum["test"]
+
+        self.tokenizer = tokenizer
+
+    def __len__(self):
+        """Returns length of the dataset"""
+        return len(self.data)
+
+    def __getitem__(self, idx):
+        """
+        Gets an example from the dataset. Returns tokenized text and summary.
+        """
+        entry = self.data[idx]
+        tokenized_input = self.tokenizer.encode(entry["text"], padding="do_not_pad", return_tensors="pt")
+
+        summary = entry["summary"][0]['text']
+        output_ids = self.tokenizer.encode(summary, truncation=True, max_length=1024,
+                                           padding='max_length', return_tensors="pt")
+
+        return tokenized_input.squeeze(0), output_ids
+
 class MensaDataset(Dataset):
     """
     Dataset class for rohitsaxena/MENSA dataset.
